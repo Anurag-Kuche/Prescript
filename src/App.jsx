@@ -7,11 +7,13 @@ import Contact from "./pages/Contact"
 import Myprofile from "./pages/Myprofile"
 import Myappointments from "./pages/Myappointments"
 import Appointment from "./pages/Appointment"
+import Navbar from "./components/Navbar"
 
 
 function App() {
   return (
     <div className="mx-4 sm:mx-[10%]">
+      <Navbar/>
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/doctors" element={<Doctors/>}/>
@@ -22,14 +24,6 @@ function App() {
         <Route path="/my-profile" element={<Myprofile/>}/>
         <Route path="/my-appointments" element={<Myappointments/>}/>
         <Route path="/appointment/:docId" element={<Appointment/>}/>
-
-
-
-
-
-
-        
-
 
       </Routes>
     </div>
