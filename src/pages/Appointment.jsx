@@ -1,6 +1,6 @@
-import { useParams, useSearchParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { AppContext } from "../context/AppContext"
-import { useEffect } from "react"
+import { useEffect,useState,useContext } from "react"
 
 
 function Appointment() {
@@ -11,16 +11,24 @@ function Appointment() {
   const fetchDocInfo=async()=>{
     const docInfo=doctors.find(doc=>doc._id=docId)
     setDocInfo(docInfo)
+    console.log(docInfo)
   }
 
   useEffect(() => {
     
-  fetchDocInfo
+  fetchDocInfo()
     
   }, [doctors,docId])
   
-  return (
-    <div>Appointment</div>
+  return docInfo &&(
+    <div>
+      {/* Doctor details */}
+      <div>
+        <div>
+          <img src={docInfo.image} alt="" />
+        </div>
+      </div>
+    </div>
   )
 }
 
