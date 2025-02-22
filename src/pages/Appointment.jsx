@@ -111,12 +111,13 @@ function Appointment() {
           <div className="flex items-center gap-3 w-full overflow-scroll mt-4">
             {
               docSlots.length&& docSlots[slotIndex].map((item,index)=>(
-                <p className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time===slotTime? 'bg-gray-600 text-white':'text-gray-400 border border-gray-300'}`} key={index}>
+                <p onClick={()=>setSlotTime(item.time)} className={`text-sm font-light flex-shrink-0 px-5 py-2 rounded-full cursor-pointer ${item.time===slotTime? 'bg-gray-600 text-white':'text-gray-400 border border-gray-300'}`} key={index}>
                   {item.time.toLowerCase()}
                 </p>
               ))
             }
           </div>
+          <button className="bg-gray-600 text-white text-sm font-light px-14 py-3 rounded-full my-6">Book Appointment</button>
 
       </div>
     </div>
