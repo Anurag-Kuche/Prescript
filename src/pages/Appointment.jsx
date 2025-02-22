@@ -7,6 +7,7 @@ import { assets } from "../assets/assets"
 function Appointment() {
   const {docId}=useParams()
   const{doctors,currencySymbol}=useContext(AppContext)
+  const daysOfWeek=['SUN','MON','TUE','WED','THU','FRI','SAT']
   const[docInfo,setDocInfo]=useState(null)
   const [docSlots,setDocSlots]=useState([])
   const[slotIndex,setSlotIndex]=useState(0)
@@ -20,13 +21,13 @@ function Appointment() {
 
   const getAvailableSlots=async()=>{
     setDocSlots([])
-    let today=new Data()
+    let today=new Date()
     for(let i=0;i<7;i++){
-      let currentDate=new Data(today);
+      let currentDate=new Date(today);
       currentDate.setDate(today.getDate()+i);
 
       let endTime=new Date()
-      endTime.setDate(today.getDate()+1)
+      endTime.setDate(today.getDate()+i)
       endTime.setHours(21,0,0,0)
 
       if(today.getDate()===currentDate.getDate()){
@@ -41,9 +42,13 @@ function Appointment() {
       while(currentDate<endTime){
         let formattedTime=currentDate.toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'})
         timeSlots.push({
-          dateTime:new Date()
+          dateTime:new Date(currentDate),
+          time:formattedTime
         })
+
+        currentDate.setMinutes(currentDate.getMinutes()+30)
       }
+      setDocSlots(prev=>([...prev,timeSlots]))
     }
   }
 
@@ -56,6 +61,10 @@ function Appointment() {
   useEffect(()=>{
     getAvailableSlots()
   },[docInfo])
+
+  useEffect(()=>{
+    console.log(docSlots);
+  },[docSlots])
   
   return docInfo &&(
     <div>
@@ -83,6 +92,11 @@ function Appointment() {
             Appointment fee: <span className="text-gray-600">{currencySymbol}{docInfo.fees}</span>
           </p>
         </div>
+      </div>
+
+      {/* Booking slots */}
+      <div className="sm:ml-72 sm:pl-4 mt-4 font-medium text-gray-700">
+
       </div>
     </div>
   )
