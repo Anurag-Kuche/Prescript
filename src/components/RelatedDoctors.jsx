@@ -10,7 +10,7 @@ const RelatedDoctors = ({ speciality, docId }) => {
     useEffect(() => {
         if (doctors.length > 0 && speciality) {
             const doctorsData = doctors.filter(
-                (doc) => doc.speciality === speciality && doc._id !== docId
+                (doc) => doc.speciality === speciality && doc._id !== docID
             )
             setRelDocs(doctorsData)
         }
